@@ -1,5 +1,4 @@
-import React from 'react';
-// import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 export function Thought({ thought, removeThought }) {
 
@@ -7,15 +6,15 @@ export function Thought({ thought, removeThought }) {
     removeThought(thought.id);
   };
 
-  // useEffect(() => {
-  //   const timeRemaining = thought.expiresAt - Date.now();
-  //   const timeout = setTimeout(() => {
-  //     removeThought(thought.id);
-  //   }, timeRemaining);
-  //   return () => {
-  //     clearTimeout(timeout);
-  //   };
-  // }, [thought]);
+  useEffect(() => {
+    const timeRemaining = thought.expiresAt - Date.now();
+    const timeout = setTimeout(() => {
+      removeThought(thought.id);
+    }, timeRemaining);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [thought, removeThought]);
 
   return (
     <li className="Thought">
